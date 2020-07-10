@@ -1,1 +1,1 @@
-# Principal-Component-Parameter-Variance-Anlysis
+# Principal-Component-Parameter-Variance-Analysis
