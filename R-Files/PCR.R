@@ -14,9 +14,9 @@ PCR <- function(Y, X, M, transform_Y = 'normalized', transform_X = 'normalized',
   #       - Z: Pricnipal components
   #       - phi: matrix of eigenvectors
   #       - Y: untransformed dependent variable
-  #       - Y: transformed dependent variable
+  #       - Y_transformed: transformed dependent variable
   #       - X: untransformed independent variables
-  #       - X: untransformed independent variablea
+  #       - X_transformed: transformed independent variablea
   #       - transform_Y/X, intercept, M: see input
   
   #dependencies: PCA function
@@ -47,10 +47,10 @@ PCR <- function(Y, X, M, transform_Y = 'normalized', transform_X = 'normalized',
     } 
   
   #compute PC beta and store results  
-    beta_Z <- solve(t(Z[,1:M]) %*% Z[,1:M]) %*% t(Z[,1:M]) %*% Y
+    beta_Z <- solve(t(Z) %*% Z) %*% t(Z) %*% Y
   
   #compute Y hat
-    Y_hat <- Z[,1:M] %*% beta_Z
+    Y_hat <- Z[,1:M] %*% beta_Z[1:M]
   #compute residuals and MSE
     residuals <- Y - Y_hat
     mse <- mean(residuals^2)
