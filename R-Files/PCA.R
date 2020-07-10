@@ -1,11 +1,3 @@
-#load needed packages
-library(MASS)
-library(glmnet)
-#install.packages('pracma')
-library(pracma);
-#install.packages('matrixStats')
-library(matrixStats);
-
 PCA <- function(X, transform = 'normalize',  EV_scal = 10) {
   #input: - X: matrix for which the PC should be computed
   #       - EV_scal: how many digits must be the same such that the length of the eigenvalues is accepted as being one (needed because of computational issues of apply)
@@ -38,6 +30,6 @@ PCA <- function(X, transform = 'normalize',  EV_scal = 10) {
   }
   
   Z = X %*% phi #compute Z matrix for M regressors
-  list_return <- list('Z' = Z, 'phi' = phi, 'eigenval' = eigenvalues, 'X' = X_untransformed, 'X_transformed' = X, 'adjusted_EV' = adjusted_EV,)
+  list_return <- list('Z' = Z, 'phi' = phi, 'eigenval' = eigenvalues, 'X' = X_untransformed, 'X_transformed' = X, 'adjusted_EV' = adjusted_EV)
   return(list_return)
 }

@@ -44,7 +44,7 @@ random_VCV <- function(lambda, low_bound_cov = 0.2, max_bound_cov = 10, low_boun
       VCV <- H %*% VCV %*% H #multiply each cell by the factors to obtain the right values on the diagonal 
     }
     
-    frob_av = ( frob_norm(VCV)^2 - sum(diag(VCV)^2) )  / (p*(p-1)) #exclude diagonal elements since they are covariances
+    frob_av = ( frobenius_norm(VCV)^2 - sum(diag(VCV)^2) )  / (p*(p-1)) #exclude diagonal elements since they are covariances
     low_cov = sum(abs(VCV) >= low_bound_cov) == p*p #check whether all entries are bigger than the specified lower bound 'low_bound_cov'
     max_cov = sum(abs(VCV) <= max_bound_cov) - sum(abs(diag(VCV)) <= max_bound_cov) == p*(p-1) #check whether all entries are smaller than the specified upper bound 'max_bound_cov'
     pos_cov = sum(VCV >= 0) == p*p 
