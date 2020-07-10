@@ -20,7 +20,7 @@ random_VCV <- function(lambda, low_bound_cov = 0.2, max_bound_cov = 10, low_boun
   #       - max/low_bound_av: upper/lower bound for the average of the squared non-diagonal entries
   #       - max_it: maximum numbers of iterations
   #       - diagonal: specififes the elements on the diagonal (optional argument)
-  #output: 
+  #output: A list containing
   #       - VCV: VAriance-Covariance matrix 
   #       - lambda: chosen eigenvalues
   #       - Q: matrix of eigenvectors
