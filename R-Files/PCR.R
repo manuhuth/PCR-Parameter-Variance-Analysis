@@ -21,8 +21,8 @@ PCR <- function(Y, X, M, transform_Y = 'normalized', transform_X = 'normalized',
   
   #dependencies: PCA function
   
-  if ( ( isFALSE( (transform_Y %in% c(0,1,2)) ) ) | ( isFALSE( (transform_X %in% c(0,1,2)) ) ) ){
-    stop('transform_X and transform_Y must either be 0, 1 or 2')
+  if ( ( isFALSE( (transform_Y %in% c('no','normalized','standardized')) ) ) | ( isFALSE( (transform_X %in% c('no','normalized','standardized')) ) ) ){
+    stop('transform_X and transform_Y must either be "no","normalized","standardized" ')
   } 
   
   #save untransformed
