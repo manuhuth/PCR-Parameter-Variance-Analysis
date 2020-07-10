@@ -2,7 +2,11 @@ PCR_predict <- function(pcr, X_test, Y_test = NULL) {
   #inpute: - PC: an object created by the PCR function
   #        - X_test: matrix of Covariates for which the values should be predicted
   #        - Y_test: Vector of the true observations for the independent variable of test data; (optional); prediction errors are computed
-  #output: - predicted Y, additionally if Y_test is specified: Mean squared prediction error and prediction error
+  #output: A list containing
+  #        - Y_pred: predicted Y
+  #        - Y_pred_transformed: transformed predicted Y
+  #        - MSPE: Mean Squarred Prediction Error, if Y_test is specified
+  #        - pred_error: prediction error, if Y_test is specified
   
   if ( isFALSE(is(pcr, 'PC_reg')) ){
     stop('The input `pcr` must be an object of class PCR, which is created by the PCR function')
