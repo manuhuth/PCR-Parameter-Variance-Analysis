@@ -14,7 +14,7 @@ frobenius_norm <- function(A) {
   return(h)
 }
 
-random_VCV <- function(lambda, low_bound_cov = 0.2, max_bound_cov = 10, low_bound_av = 0, max_it = 500, diagonal = NULL, pos = FALSE) {
+random_VCV <- function(lambda, low_bound_cov = 0, max_bound_cov = 10, low_bound_av = 0, max_it = 500, diagonal = NULL, pos = FALSE) {
   #input: - lambda: vector of eigenvalues for the VCV matrix. Length of Vector determines number of covariates
   #       - max/low_bound_cov: upper/lower bound for the absolute values of the covariances
   #       - max/low_bound_av: upper/lower bound for the average of the squared non-diagonal entries
