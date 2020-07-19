@@ -10,18 +10,3 @@ r_packages:
   - pracma
   - matrixStats
 
-before_script:
-  - source .travis.sh
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - create_conda_environment
-  - source activate test-environment
-  - pip install -U -q pip setuptools wheel
-  - pip install -U -q 'papermill>=0.16.0'
-  - R -e "IRkernel::installspec()"
-  - jupyter kernelspec list
-  - pip freeze
-script:
-  # Run pytest -s to disable capturing of stdout and see prints
-  - pytest
-
-
