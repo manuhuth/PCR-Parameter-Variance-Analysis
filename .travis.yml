@@ -1,7 +1,27 @@
 language: R
+sudo: false
+dist: trusty
 cache: packages
-
 warnings_are_errors: false
+r_packages:
+  - devtools
+  - MASS
+  - glmnet
+  - pracma
+  - matrixStats
 
+before_script:
+  - source .travis.sh
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - create_conda_environment
+  - source activate test-environment
+  - pip install -U -q pip setuptools wheel
+  - pip install -U -q 'papermill>=0.16.0'
+  - R -e "IRkernel::installspec()"
+  - jupyter kernelspec list
+  - pip freeze
 script:
-  - R.test
+  # Run pytest -s to disable capturing of stdout and see prints
+  - pytest
+
+
