@@ -56,8 +56,16 @@ if (isTRUE(test_cat)) {
 #number of siblings ->
 gamma_parent <- 2 #function input
 max_yearsSchooling <- 20 #maybe find convenient alternative
-lambda_err_numbSiblings <- 0.1#func input
-eta_err_numbSiblings <- 0 #func_input
-err_numbSiblings <- dgpois(n, lambda = lambda_err_numbSiblings, omega = eta_err_numbSiblings)
-numbSiblings_latent <- gamma_parent*parent_educ + err_numbSiblings
-
+prob_numbSiblings <- 0.1 #func input: additional year of schooling reduces the expected number of children by 0.1
+transformed_parentEduc <- max_yearsSchooling - parent_educ #to make it feasible with theory
+transformed_parentEduc <- replace(transformed_parentEduc, transformed_parentEduc < 0, 0)
+mean_numberSiblings <- 1.692 #func input
+var_numberSiblings <- 2.5 #func input
+expec_var <- (max_yearsSchooling - mean_parent_educ)*prob_numbSiblings*(1-prob_numbSiblings)
+var_expec <- prob_numbSiblings^2 * variance_parent_educ
+eta_err_numbSiblings <- 1 - sqrt(mean_numberSiblings - (max_yearsSchooling - mean_parent_educ)*prob_numbSiblings) / sqrt(var_numberSiblings - expec_var - var_expec)
+lambda_err_numbSiblings <- (mean_numberSiblings - (max_yearsSchooling - mean_parent_educ)*prob_numbSiblings)*(1-eta_err_numbSiblings)
+err_numbSiblings <- rgenPois(n, lambda = lambda_err_numbSiblings, eta = eta_err_numbSiblings)$rnumb
+numb_Siblings_first <- sapply(transformed_parentEduc, rbinom_wrapper, n = 1, p = prob_numbSiblings)
+numb_Siblings <- numb_Siblings_first + err_numbSiblings
+var(numb_Siblings)
