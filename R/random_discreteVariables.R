@@ -22,24 +22,33 @@ rdiscrete <- function(n, prob_mass, X) {
 }
 
 
-library(LaplacesDemon)
+dgPois <- function(x, lambda, eta) {
 
-rgenPois <- function(n, lambda, eta){
-  random_numbers <- numeric(n)
+  prob <- lambda*(lambda + x*eta)^(x-1)*exp(-lambda - x*eta)/factorial(x)
+  return(prob)
+}
 
-  for (j in 1:n) {
-    index <- 0
-    unif <- runif(1)
-    nain <- dgpois(0, lambda = lambda, omega = eta)
-    while(nain < unif) {
-      index <- index + 1
-      nain <- nain + dgpois(index, lambda = lambda, omega = eta)
-    }
-    random_numbers[j] <- index
-  }
-  output <- list('rnumb' = random_numbers, 'cumDensity')
+rgenPois <- function(n, lambda, eta, length_cumDensity = 100){
+  #input: - n: number of random values
+  #       - lambda: first parameter that characterizes mean and variance
+  #       - eta: second parameter that characterizes mean and variance.
+  #output:- random_value: vector of generalized Poisson distributed random variables
+
+  distribution_value <- runif(n)
+  cum_dens <- cumsum(dgPois(0:length_cumDensity, lambda = lambda, eta = eta)) #omega logic is vice versa
+  positions <- sapply(distribution_value, rdiscr_position, cum_dens = cum_dens)
+  numb_help <- 0:length_cumDensity
+  random_value <- numb_help[positions]
+  output <- list('random_value' = random_value, 'distribution_value' = distribution_value)
   return(output)
 }
 
+
+rbinom_wrapper <- function(x, p){
+  #input: - see for a full overview: https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Binomial.html
+  # wrapper to use sapply
+  output <- rbinom(1, x, p)
+  return(output)
+}
 
 
