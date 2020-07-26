@@ -20,12 +20,28 @@ I have integrated a continous integration service with Travis CI. It can be foun
 ...
 
 ## References
+# References
+---
+> Bailey, M. J. (2010). " Momma's got the pill": how Anthony Comstock and Griswold v. Connecticut shaped US childbearing. American economic review, 100(1), 98-129.
+
 > Blundell, R., Dearden, L., & Sianesi, B. (2005). Evaluating the effect of education on earnings: models, methods and results from the National Child Development Survey. Journal of the Royal Statistical Society: Series A (Statistics in Society), 168(3), 473-512.
 
 > Blundell, R., Pistaferri, L., & Saporta-Eksten, I. (2016). Consumption inequality and family labor supply. American Economic Review, 106(2), 387-435.
 
 > Card, D. (2001). Estimating the return to schooling: Progress on some persistent econometric problems. Econometrica, 69(5), 1127-1160.
 
+> Cygan-Rehm, K., & Maeder, M. (2013). The effect of education on fertility: Evidence from a compulsory schooling reform. Labour Economics, 25, 35-48.
+
+> Consul, P. C., & Jain, G. C. (1973). A generalization of the Poisson distribution. Technometrics, 15(4), 791-799.
+
+> Davis-Kean, P. E. (2005). The influence of parent education and family income on child achievement: the indirect role of parental expectations and the home environment. Journal of family psychology, 19(2), 294.
+
 > Friedman, J., Hastie, T., & Tibshirani, R. (2001). The elements of statistical learning (Vol. 1, No. 10). New York: Springer series in statistics.
 
+> Hansen, K. T., Heckman, J. J., & Mullen, K. J. (2004). The effect of schooling and ability on achievement test scores. Journal of econometrics, 121(1-2), 39-98.
+
 > James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An introduction to statistical learning (Vol. 112, p. 18). New York: springer.
+
+> Jung, R. C., & Tremayne, A. R. (2011). Convolution‐closed models for count time series with applications. Journal of Time Series Analysis, 32(3), 268-280.
+
+> Willis, R. J. (1973). A new approach to the economic theory of fertility behavior. Journal of political Economy, 81(2, Part 2), S14-S64.
