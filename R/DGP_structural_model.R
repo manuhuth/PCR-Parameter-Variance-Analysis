@@ -28,7 +28,10 @@ parent_educ_weight_test_read <- 0.5 #function output
 err_test7_m <- rnorm(n = n, mean = 0, sd = var_err^0.5) #if changed -> test7_m must be changed
 gamma_ability <- 4 #function input
 test7_m_latent <- gamma_ability*ability + err_test7_m
-test7_m <- (1-parent_educ_weight_test_math)*pnorm(test7_m_latent, mean = 0, sd = (gamma_ability^2*var_ability+var_err)^0.5) + parent_educ_weight_test_math*parent_educ_unif# uniform distributed -> fits to data
+test7_m <- (1-parent_educ_weight_test_math)*pnorm(test7_m_latent, mean = 0, sd = (gamma_ability^2*var_ability+var_err)^0.5) + parent_educ_weight_test_math*parent_educ_unif # uniform distributed -> fits to data
+test7_m <- (1-parent_educ_weight_test_math)*pnorm(test7_m_latent, mean = 0, sd = (gamma_ability^2*var_ability+var_err)^0.5) + parent_educ_weight_test_math*parent_educ_unif # uniform distributed -> fits to data
+
+hist(test7_m)
 err_test11_m <- rnorm(n = n, mean = 0, sd =var_err^0.5)
 test11_m_latent <- test7_m_latent + err_test11_m
 test11_m <- (1-parent_educ_weight_test_math)*pnorm(test7_m_latent, mean = 0, sd = (gamma_ability^2*var_ability + 2*var_err)^0.5) + parent_educ_weight_test_math*parent_educ_unif # uniform distributed -> fits to data
@@ -108,6 +111,8 @@ bound_constant_low <- -4 #func_input
 bound_constant_up <- 4 #func input
 beta_min <- c(0.03, 0.01, -0.06, -2, 0.01) #function input #(schooling, working, working square, numb siblings, education)
 beta_max <- c(0.06, 0.06, -0.03, 2, 2) #function input # bounds are from Estimating the return to investments in education: howuseful is the standard Mincer equation?
+variance_error_wage <- 0.5 #func input
+error_wage <- rnorm(n, 0, variance_error_wage^0.5)
 mean_wage <- 2 #func input
 variance_wage <- 0.433^2 #func input
 tau <- 0.1 #func input
@@ -121,7 +126,7 @@ wage_optim <- function(par) {
   a <- par[1]
   beta_calc <- c(1, beta) #add ability for covariance
 
-  objective <- tau*(mean_wage - a - colMeans(covariates) %*% beta_calc)^2 + (1-tau)*((variance_wage - t(beta_calc) %*% VCV_cov %*% beta_calc )^2)^(1/2)
+  objective <- tau*(mean_wage - a - colMeans(covariates) %*% beta_calc)^2 + (1-tau)*((variance_wage - t(beta_calc) %*% VCV_cov %*% beta_calc - variance_error_wage )^2)^(1/2)
   return(objective)
 }
 
@@ -141,7 +146,7 @@ fit <- constrOptim(theta = starting_values , f = wage_optim, ui = ui, ci = ci, m
 data <- data.frame(ability, test7_m, test11_m, test7_r, test11_r, parent_educ, schooling, numb_Siblings, working)
 matrix_to_create_data <- data.frame(rep(1,n), schooling, working, working_sqr, numb_Siblings, parent_educ)
 
-wage <- ability + as.matrix(matrix_to_create_data) %*% fit$par
+wage <- ability + as.matrix(matrix_to_create_data) %*% fit$par + error_wage
 
 mean(wage) #fits
 var(wage) # too high
