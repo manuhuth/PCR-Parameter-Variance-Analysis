@@ -128,5 +128,3 @@ dgp_model <- function(n = 1000, var_err = 1,
   data <- cbind(logwage, data)
 return(data)
 }
-
-d <- dgp_model(n = 20000)
