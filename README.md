@@ -20,8 +20,7 @@ I have integrated a continous integration service with Travis CI. It can be foun
 ...
 
 ## References
-# References
----
+
 > Bailey, M. J. (2010). " Momma's got the pill": how Anthony Comstock and Griswold v. Connecticut shaped US childbearing. American economic review, 100(1), 98-129.
 
 > Björklund, A., & Kjellström, C. (2002). Estimating the return to investments in education: how useful is the standard Mincer equation?. Economics of Education Review, 21(3), 195-210.
