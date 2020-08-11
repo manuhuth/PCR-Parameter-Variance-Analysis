@@ -14,7 +14,7 @@ rdiscrete <- function(n, prob_mass, X) {
   #dependencies: rdiscr_position function
 
   random <- runif(n)
-  cum_dens <- cumsum(prob_mass)
+  cum_dens <- c(0,cumsum(prob_mass))
   positions <- sapply(random, rdiscr_position, cum_dens = cum_dens)
   random_value <- X[positions]
 
