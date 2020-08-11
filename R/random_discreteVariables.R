@@ -44,6 +44,7 @@ rgenPois <- function(n, lambda, eta, length_cumDensity = 100){
 }
 
 
+
 rbinom_wrapper <- function(x, p){
   #input: - see for a full overview: https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Binomial.html
   # wrapper to use sapply

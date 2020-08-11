@@ -3,17 +3,17 @@ for (i in 1:length(files)) { #loop to read all files
   source(paste('R/', files[i], '.R', sep = ''))
 }
 
-set.seed(123)
+
 dgp_model <- function(n = 1000, var_err = 1,
-                      mean_parent_educ = 7.2, variance_parent_educ = 4.82^0.5,
+                      mean_parent_educ = 13.342, variance_parent_educ = 21.215,
                       var_ability = 1, gamma_ability = 2,  gamma_parent_educ = 2,
                       breaks_test7_m = c(0, 0.141, 0.158, 0.185, 0.190, 0.212),  breaks_test11_m = c(0, 0.122,0.152, 0.157, 0.179, 0.199),
                       breaks_test7_r =  c(0, 0.166, 0.179, 0.188, 0.187, 0.165),  breaks_test11_r = c(0, 0.132, 0.163, 0.163, 0.176, 0.176), test_cat = TRUE,
-                      gamma_parent = 2, mean_numberSiblings = 1.692, var_numberSiblings = 1.7^2,  max_yearsSchooling = 20, min_yearsSchooling = 4, prob_numbSiblings = 0.1,
-                      mean_schooling = 7.2, variance_schooling = 4.82^2, q = 0.8,
-                      age = 33, probs_gap = c(0.4,0.4,0.15,0.05), gap_years = c(0,1,2,3), age_school_count = 12,
-                      bound_constant_low = -4, bound_constant_up = 4, beta_min = c(0.03, 0.01, -0.06, -2, 0.01), beta_max = c(0.06, 0.06, -0.03, 2, 2),
-                      variance_error_wage = 0.1,  mean_wage = 2, variance_wage = 0.433^2,  tau = 0.5,
+                      mean_numberSiblings = 1.692, var_numberSiblings = 1.7^2,  max_yearsSchooling = 20, min_yearsSchooling = 12, prob_numbSiblings = 0.1,
+                      mean_schooling = 13.342, variance_schooling = 21.215, q = 0.85,
+                      age = 33, probs_gap = c(0.59, 0.11,0.7,0.04, 0.03), gap_years = c(0,1,2,3,4), age_school_count = 4,
+                      bound_constant_low = -4, bound_constant_up = 4, beta_min = c(0.03, 0.01, -0.06, -10, 0.01), beta_max = c(0.06, 0.06, -0.03, 10, 10),
+                      variance_error_wage = 0.1,  mean_wage = 2, variance_wage = 1.5,  tau = 0.5,
                       starting_values = c(3.5, 0.046, 0.026, -0.037, 0, 0.05), mu = 1e-4, outer.it = 500, outer.eps = 1e-10
 
 ) {
@@ -69,7 +69,8 @@ dgp_model <- function(n = 1000, var_err = 1,
 
 
   #number of years of schooling -> generalized Poisson process to be in line with parents, last hard part, maybe incorporate channel from parents educ to test scores (through ability)
-  k <- 2*(mean_schooling- mean_parent_educ *q) / ( (variance_schooling - mean_parent_educ * q* (1-q) - variance_parent_educ * q - 1/3 * (mean_schooling - mean_parent_educ*q)^2)^0.5)
+  k <- 2*(mean_schooling- mean_parent_educ *q)^(3/2) / ( (variance_schooling - mean_parent_educ * q* (1-q) - variance_parent_educ * q - 1/3 * (mean_schooling - mean_parent_educ*q)^2)^0.5)
+
   if (k < 0) {
     k = - k #adjust for two solution case
   }
@@ -108,7 +109,7 @@ dgp_model <- function(n = 1000, var_err = 1,
     a <- par[1]
     beta_calc <- c(1, beta) #add ability for covariance
 
-    objective <- tau*(mean_wage - a - colMeans(covariates) %*% beta_calc)^2 + (1-tau)*(variance_wage^0.5 - (t(beta_calc) %*% VCV_cov %*% beta_calc)^0.5 - variance_error_wage^0.5 )^2
+    objective <- tau*(mean_wage - a - colMeans(covariates) %*% beta_calc)^2 + (1-tau)*(variance_wage^0.5 - (t(beta_calc) %*% VCV_cov %*% beta_calc - variance_error_wage)^0.5 )^2
     return(objective)
   }
 
