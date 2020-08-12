@@ -1,4 +1,5 @@
-population <- load("C:/Users/Mhuth/Desktop/PCRPVA/SimData/population.RData")
+#population <- load("C:/Users/Mhuth/Desktop/PCRPVA/SimData/population.RData")
+#population <- load("SimData/population.RData")
 
 X <- population[c('test7_m', 'test11_m', 'test7_r', 'test11_r', 'parent_educ', 'schooling', 'working')]
 X <- cbind(X, X$working^2/100)
