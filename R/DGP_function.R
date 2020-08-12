@@ -1,9 +1,3 @@
-files <- c('PCA_PropVar', 'PCA', 'PCR_cv', 'PCR_predict', 'PCR', 'random_discreteVariables', 'random_VCV') #names of files to read
-for (i in 1:length(files)) { #loop to read all files
-  source(paste('R/', files[i], '.R', sep = ''))
-}
-
-
 dgp_model <- function(n = 1000, var_err = 1,
                       mean_parent_educ = 13.342, variance_parent_educ = 21.215,
                       var_ability = 1, gamma_ability = 2,  gamma_parent_educ = 2,
