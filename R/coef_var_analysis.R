@@ -96,7 +96,7 @@ coef_var_analysis <- function(population, true_phi, M, sample_size, transform, i
   diff_beta_hat_changed <- colSums(store_beta_prac_changed - store_beta_prac)
 
   list_return <- list('variances_beta_prac' = variances_beta_prac, 'variances_beta_prac_formula' = variances_beta_prac_formula,
-                      'variances_beta_theo' =  variances_beta_theo, ' variances_beta_theo_formula' =  variances_beta_theo_formula,
+                      'variances_beta_theo' =  variances_beta_theo, 'variances_beta_theo_formula' =  variances_beta_theo_formula,
                       'variances_Y_prac' = variances_Y_prac, 'variances_Y_theo' = variances_Y_theo, 'diff_Y_hat_changed' = diff_Y_hat_changed,
                       'diff_beta_hat_changed ' = diff_beta_hat_changed )
   return(list_return)
