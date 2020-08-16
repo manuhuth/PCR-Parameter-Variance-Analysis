@@ -38,7 +38,7 @@ PCA <- function(X, transform = 'normalized',  EV_scal = 10) {
 
   as.matrix(X)
   Z = X %*% phi #compute Z matrix for M regressors
-  list_return <- list('Z' = Z, 'phi' = phi, 'eigenval' = eigenvalues, 'X' = X_untransformed, 'X_transformed' = X, 'adjusted_EV' = adjusted_EV)
+  list_return <- list('Z' = Z, 'phi' = phi, 'eigenval' = eigenvalues, 'X' = X_untransformed, 'X_transformed' = X, 'adjusted_EV' = adjusted_EV, 'lambda' = eigenvalues)
 
   class(list_return) <- 'PCA'
   return(list_return)

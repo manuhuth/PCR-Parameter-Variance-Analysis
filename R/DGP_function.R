@@ -1,4 +1,4 @@
-dgp_model <- function(n = 1000, var_err = 1,
+dgp_model <- function(n = 1000, var_err_7 = 1, var_err_11 = 30,
                       mean_parent_educ = 13.342, variance_parent_educ = 21.215,
                       var_ability = 1, gamma_ability = 2,  gamma_parent_educ = 2,
                       breaks_test7_m = c(0, 0.141, 0.158, 0.185, 0.190, 0.212),  breaks_test11_m = c(0, 0.122,0.152, 0.157, 0.179, 0.199),
@@ -26,20 +26,20 @@ dgp_model <- function(n = 1000, var_err = 1,
   ability <- rnorm(n = n, mean = 0, sd = var_ability^0.5)
 
   #test scores -> modified version of Heckman, Muller (effect of schooling and ability on average test scores)
-  err_test7_m <- rnorm(n = n, mean = 0, sd = var_err^0.5)
+  err_test7_m <- rnorm(n = n, mean = 0, sd = var_err_7^0.5)
   test7_m_latent <- gamma_ability*ability + gamma_parent_educ*qnorm(parent_educ_unif, mean = 0, sd = var_ability^0.5) + err_test7_m
-  test7_m <- pnorm(test7_m_latent, mean = 0, sd = ((gamma_ability^2 + gamma_parent_educ^2)*var_ability+var_err)^0.5) # uniform distributed
+  test7_m <- pnorm(test7_m_latent, mean = 0, sd = ((gamma_ability^2 + gamma_parent_educ^2)*var_ability+var_err_7)^0.5) # uniform distributed
 
-  err_test11_m <- rnorm(n = n, mean = 0, sd =var_err^0.5)
+  err_test11_m <- rnorm(n = n, mean = 0, sd = var_err_11^0.5)
   test11_m_latent <- test7_m_latent + err_test11_m
-  test11_m <- pnorm(test7_m_latent, mean = 0, sd = ((gamma_ability^2 + gamma_parent_educ^2)*var_ability + 2*var_err)^0.5) # uniform distributed
+  test11_m <- pnorm(test7_m_latent, mean = 0, sd = ((gamma_ability^2 + gamma_parent_educ^2)*var_ability + var_err_7 + var_err_11)^0.5) # uniform distributed
 
-  err_test7_r <- rnorm(n = n, mean = 0, sd = var_err^0.5)
+  err_test7_r <- rnorm(n = n, mean = 0, sd = var_err_7^0.5)
   test7_r_latent <- gamma_ability*ability +  gamma_parent_educ*qnorm(parent_educ_unif, mean = 0, sd = var_ability^0.5) + err_test7_r
-  test7_r <- pnorm(test7_r_latent, mean = 0, sd = ((gamma_ability^2 + gamma_parent_educ^2)*var_ability+var_err)^0.5)# uniform distributed
-  err_test11_r <- rnorm(n = n, mean = 0, sd = var_err^0.5)
+  test7_r <- pnorm(test7_r_latent, mean = 0, sd = ((gamma_ability^2 + gamma_parent_educ^2)*var_ability+var_err_7)^0.5)# uniform distributed
+  err_test11_r <- rnorm(n = n, mean = 0, sd = var_err_11^0.5)
   test11_r_latent <- test7_r_latent + err_test11_r
-  test11_r <-pnorm(test7_r_latent, mean = 0, sd = ((gamma_ability^2 + gamma_parent_educ^2)*var_ability+ 2*var_err)^0.5)# uniform distributed
+  test11_r <-pnorm(test7_r_latent, mean = 0, sd = ((gamma_ability^2 + gamma_parent_educ^2)*var_ability+ var_err_7 + var_err_11)^0.5)# uniform distributed
 
 
   breaks_test7_m = breaks_test7_m / sum(breaks_test7_m)
@@ -130,4 +130,3 @@ dgp_model <- function(n = 1000, var_err = 1,
   data <- cbind(logwage, data, age)
 return(data)
 }
-
