@@ -1,4 +1,17 @@
 coef_var_analysis <- function(population, true_phi, M, sample_size, transform, iterations) {
+  #input: - population: matrix containing the y variable as first column and the regressors as the other columns
+  #       - true_phi: maatrix of the true eigenvectors
+  #       - M: number of principal components that should be used
+  #       - sample_size: size of the samples used for the analysis
+  #       - transform: either 'no', 'normalized' or 'standardized'
+  #       - iterations: number of iterations per estimate
+  #output: - variances_beta_prac/theo: variances of the simulated beta in the stochastic/non-stochastic case using the empirical distribution
+  #        - variances_beta_prac/theo_formula: variances of the simulated beta in the stochastic/non-stochastic case using formula 3.21
+  #        - variances_Y_prac: Variances of Y hat in the stochastic case
+  #        - variances_Y_theo: Variances of Y hat in the non-stochastic case
+  #        - diff_Y_hat_changed: sum of differences in Y hat between stochastic and non-stochastic case
+  #        - diff_beta_hat_changed: sum of differences in beta hat between stochastic and non-stochastic case
+
   store_beta_theo <- c()
   store_beta_prac <- c()
   store_Y_hat_theo <- c()
