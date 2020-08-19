@@ -33,7 +33,11 @@ I have integrated a continous integration service with Travis CI. It can be foun
 
 > British Government. School Leaving Age. visited at 10.08.2020 at 19.17. [Link](https://www.gov.uk/know-when-you-can-leave-school)
 
+> British Government. State Pension Age. visited at 10.08.2020 at 18.13. [Link](https://www.gov.uk/state-pension-age)
+
 > Card, D. (2001). Estimating the return to schooling: Progress on some persistent econometric problems. Econometrica, 69(5), 1127-1160.
+
+> Carneiro, P., Heckman, J. J., & Vytlacil, E. J. (2011). Estimating marginal returns to education. American Economic Review, 101(6), 2754-81.
 
 > Cygan-Rehm, K., & Maeder, M. (2013). The effect of education on fertility: Evidence from a compulsory schooling reform. Labour Economics, 25, 35-48.
 
@@ -45,11 +49,19 @@ I have integrated a continous integration service with Travis CI. It can be foun
 
 > Hansen, K. T., Heckman, J. J., & Mullen, K. J. (2004). The effect of schooling and ability on achievement test scores. Journal of econometrics, 121(1-2), 39-98.
 
+> Heckman, J. J., Lochner, L. J., & Todd, P. E. (2006). Earnings functions, rates of return and treatment effects: The Mincer equation and beyond. Handbook of the Economics of Education, 1, 307-458.
+
 > Holmlund, B., Liu, Q., & Nordström Skans, O. (2008). Mind the gap? Estimating the effects of postponing higher education. Oxford Economic Papers, 60(4), 683-710.
+
+> Human Development Report (2020). United Nations Development Programme. [Link](http://hdr.undp.org/en/indicators/103006)
 
 > James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An introduction to statistical learning (Vol. 112, p. 18). New York: springer.
 
 > Jung, R. C., & Tremayne, A. R. (2011). Convolution‐closed models for count time series with applications. Journal of Time Series Analysis, 32(3), 268-280.
+
+> Lemieux, T. (2006). The “Mincer equation” thirty years after schooling, experience, and earnings. In Jacob Mincer a pioneer of modern labor economics (pp. 127-145). Springer, Boston, MA.
+
+> Mincer, J. (1974). Schooling, Experience, and Earnings. Human Behavior & Social Institutions No. 2.
 
 > Office for National Statistics. Population Estimates. visited at 10.08.2020 at 19.02. [Link]((https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland/mid2015/ukandregionalpopulationestimates18382015.zip))
 
