@@ -114,7 +114,7 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
     store_beta_theo <- c()
     store_beta_theo_formula <- c()
 
-    for (index in 1:25) {
+    for (index in 1:length(list_variances)) {
       prac_mean <- mean(list_variances[[index]]$variances_beta_prac[,beta_column])
       if (type_CI == 'mean') {
         prac_sd <- var(list_variances[[index]]$variances_beta_prac[,beta_column])^0.5 /numb_it
