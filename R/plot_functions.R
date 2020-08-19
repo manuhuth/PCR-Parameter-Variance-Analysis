@@ -104,6 +104,8 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
   #       - sample_size: vector containing the sample sizes
   #       - beta_column: index for which beta the plot should be prepared
   #       - confidence: confidence level in which the variance estimate should be
+  #       - type_CI: if 'mean' the confidence intervals of the mean are plotted. If != 'mean' coverage probabilities are plotted
+  #       - numb_it: umber of iterations used to compute the means of the standard errors
   #output: - 4 data frames containing the lower/upper bounds and the means of the variances
     low <- (1-confidence)/2
     up <- (1-confidence)/2 + confidence
@@ -172,7 +174,7 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
 
 plots_variance_CI <- function(variance_plots_data, first_method, second_method, colour_1, colour_2,
                               xlab_string, ylab_string, legend_df1, legend_df2, height = c(1,0.2),
-                              numb_columns, numb_plots = NULL, sample_size, position_ylab = 0.6) {
+                              numb_columns, numb_plots = NULL, sample_size, position_ylab = 0.6, subtitle, make_subtitle = TRUE) {
   #input: - variance_plots_data: list created by prepare_variances_plots_CI
   #       - first/second_method: either c(beta_prac, beta_prac_formula, beta_theo, beta_theo_formula)
   #       - colour_1/2: colour of line plot
@@ -194,12 +196,16 @@ plots_variance_CI <- function(variance_plots_data, first_method, second_method, 
     df <- as.data.frame(cbind(df1[,'up'],df1[,'mean'], df1[,'low'], df2[,'up'],df2[,'mean'], df2[,'low'], sample_size))
 
     colnames(df) <- c('up1', 'mean1', 'low1', 'up2', 'mean2', 'low2', 'sample_size')
+    subt <- ggtitle(" ")
+    if (isTRUE(make_subtitle)) {
+      subt <- ggtitle(paste(subtitle, index, sep = ""))
+    }
     plot_list[[index]] <- ggplot(data = df, aes(sample_size, up1)) +
       geom_ribbon(data=df,aes(ymin=low1,ymax=up1),alpha=0.3, fill = colour_1) +
       geom_ribbon(data=df,aes(ymin=low2,ymax=up2),alpha=0.3, fill = colour_2) +
       geom_line(data = df, aes(sample_size, mean1,colour = legend_df1)) +
       geom_line(data = df, aes(sample_size, mean2,colour = legend_df2)) +
-      ggtitle(paste('beta', index, sep = "")) +
+      subt +
       xlab(xlab_string) + ylab(' ') + labs(colour = '') +
       scale_colour_manual(values=c(colour_2, colour_1)) +
       theme(plot.title = element_text(hjust = 0.5), legend.position = 'none')
@@ -209,4 +215,35 @@ plots_variance_CI <- function(variance_plots_data, first_method, second_method, 
   cowplot::plot_grid(p_grid, legend, ncol = 1, rel_heights = height) +
     cowplot::draw_label(ylab_string, x=  0, y=position_ylab, vjust= 1, angle=90)
 
+}
+
+prepare_Y_variances <- function(meth_interest, list_variances, confidence, type_CI = 'mean') {
+  #input: - meth_interest: method to call from 'list variances'
+  #       - list_variances: object created by prepare_variance_plots function
+  #       - confidence: confidence level in which the variance estimate should be
+  #       - type_CI: if 'mean' the confidence intervals of the mean are plotted. If != 'mean' coverage probabilities are plotted
+  #output: - a matrix containing the lower/upper bounds and the means of the variances
+  store_mean <- c()
+  store_up <- c()
+  store_low <- c()
+  low <- (1-confidence)/2
+  up <- (1-confidence)/2 + confidence
+  for (index in 1:length(list_variances)) {
+    help_object <- list_variances[[index]][[meth_interest]]
+    sd <- var(help_object)^0.5
+    mean <-  mean(help_object)
+    store_mean <- rbind(store_mean, mean)
+
+    if (type_CI == 'mean') {
+      store_up <- rbind(store_up, mean + qnorm(up, mean, sd)*sd )
+      store_low <- rbind(store_low, mean - qnorm(up, mean, sd)*sd )
+    } else {
+      store_up <- rbind(store_up, quantile(help_object, up))
+      store_low <- rbind(store_low, quantile(help_object, low))
+    } #end if/else
+  } #end index
+
+  matrix_return <- cbind(store_up, store_mean, store_low)
+  colnames(matrix_return) <- c('up', 'mean', 'low')
+  return(matrix_return)
 }
