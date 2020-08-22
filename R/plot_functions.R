@@ -78,14 +78,14 @@ prepare_variance_plots <- function(list_coef_var_analysis, sample_size, confiden
     help_mean_prac_formula <- colMeans(list_coef_var_analysis[[index]]$variances_beta_prac_formula)
     means_cl_prac_formula <- rbind(means_cl_prac_formula,  t(help_mean_prac_formula))
     help_var_prac_formula <- colVars(list_coef_var_analysis[[index]]$variances_beta_prac_formula) / sample_size[index] #variance of estimator
-    upper_cl_prac_formula <- rbind( upper_cl_prac_formula, t(help_mean_prac_formula + qnorm(confidence + (1-confidence)/2 ) * help_var_prac_formula^0.5) ) #upper bound CI
-    lower_cl_prac_formula <- rbind( lower_cl_prac_formula, t(help_mean_prac_formula - qnorm( confidence + (1-confidence)/2 ) * help_var_prac_formula^0.5) ) #lower bound CI
+    upper_cl_prac_formula <- rbind( upper_cl_prac_formula, t(help_mean_prac_formula + qt(confidence + (1-confidence)/2,sample_size[index] -1 ) * help_var_prac_formula^0.5) ) #upper bound CI
+    lower_cl_prac_formula <- rbind( lower_cl_prac_formula, t(help_mean_prac_formula - qt( confidence + (1-confidence)/2, sample_size[index]-1 ) * help_var_prac_formula^0.5) ) #lower bound CI
 
     help_mean_theo_formula <- colMeans(list_coef_var_analysis[[index]]$variances_beta_theo_formula)
     means_cl_theo_formula <- rbind(means_cl_theo_formula, t(help_mean_theo_formula) )
     help_var_theo_formula <- colVars(list_coef_var_analysis[[index]]$variances_beta_theo_formula) / sample_size[index] #variance of estimator
-    upper_cl_theo_formula <- rbind( upper_cl_theo_formula, t(help_mean_theo_formula + qnorm( confidence + (1-confidence)/2 ) * help_var_theo_formula^0.5) ) #upper bound CI
-    lower_cl_theo_formula <- rbind( lower_cl_theo_formula, t(help_mean_theo_formula - qnorm( confidence + (1-confidence)/2 ) * help_var_theo_formula^0.5) ) #lower bound CI
+    upper_cl_theo_formula <- rbind( upper_cl_theo_formula, t(help_mean_theo_formula + qt( confidence + (1-confidence)/2,sample_size[index]-1 ) * help_var_theo_formula^0.5) ) #upper bound CI
+    lower_cl_theo_formula <- rbind( lower_cl_theo_formula, t(help_mean_theo_formula - qt( confidence + (1-confidence)/2,sample_size[index]-1 ) * help_var_theo_formula^0.5) ) #lower bound CI
 
     means_cl_prac <- rbind(means_cl_prac, t(colVars(list_coef_var_analysis[[index]]$variances_beta_prac) ) )
     means_cl_theo <- rbind(means_cl_theo, t(colVars(list_coef_var_analysis[[index]]$variances_beta_theo) ) )
@@ -99,7 +99,7 @@ prepare_variance_plots <- function(list_coef_var_analysis, sample_size, confiden
 }
 
 #Plots with CI
-prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column, confidence, type_CI = 'mean', numb_it) {
+prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column, confidence, type_CI = 'mean', line = 'mean', numb_it) {
   #input: - list_variances: object created by prepare_variance_plots function
   #       - sample_size: vector containing the sample sizes
   #       - beta_column: index for which beta the plot should be prepared
@@ -116,10 +116,11 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
 
     for (index in 1:length(list_variances)) {
       prac_mean <- mean(list_variances[[index]]$variances_beta_prac[,beta_column])
+      prac_line <- list_variances[[index]]$variances_beta_prac[1,beta_column]
       if (type_CI == 'mean') {
         prac_sd <- var(list_variances[[index]]$variances_beta_prac[,beta_column])^0.5 / numb_it^0.5
-        prac_up <- prac_mean + qnorm(up, prac_mean, prac_sd)*prac_sd
-        prac_low <- prac_mean - qnorm(up, prac_mean, prac_sd)*prac_sd
+        prac_up <- prac_mean + qt(up, numb_it-1)*prac_sd
+        prac_low <- prac_mean - qt(up, numb_it -1)*prac_sd
       } else{
         prac_up <- quantile(list_variances[[index]]$variances_beta_prac[,beta_column], up)
         prac_low <- quantile(list_variances[[index]]$variances_beta_prac[,beta_column], low)
@@ -127,10 +128,11 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
 
 
       prac_formula_mean <- mean(list_variances[[index]]$variances_beta_prac_formula[,beta_column])
+      prac_formula_line <- list_variances[[index]]$variances_beta_prac_formula[1,beta_column]
       if (type_CI == 'mean') {
         prac_formula_sd <- var(list_variances[[index]]$variances_beta_prac_formula[,beta_column])^0.5 /numb_it^0.5
-        prac_formula_up <- prac_formula_mean + qnorm(up, prac_formula_mean, prac_formula_sd)*prac_formula_sd
-        prac_formula_low <- prac_formula_mean - qnorm(up, prac_formula_mean, prac_formula_sd)*prac_formula_sd
+        prac_formula_up <- prac_formula_mean + qt(up, numb_it-1)*prac_formula_sd
+        prac_formula_low <- prac_formula_mean - qt(up, numb_it-1)*prac_formula_sd
       } else{
       prac_formula_up <-quantile(list_variances[[index]]$variances_beta_prac_formula[,beta_column], up)
       prac_formula_low <- quantile(list_variances[[index]]$variances_beta_prac_formula[,beta_column], low)
@@ -138,29 +140,50 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
 
 
       theo_mean <- mean(list_variances[[index]]$variances_beta_theo[,beta_column])
+      theo_line <- list_variances[[index]]$variances_beta_theo[1,beta_column]
       if (type_CI == 'mean') {
         theo_sd <- var(list_variances[[index]]$variances_beta_theo[,beta_column])^0.5 /numb_it^0.5
-        theo_up <- theo_mean + qnorm(up, theo_mean, theo_sd)*theo_sd
-        theo_low <- theo_mean - qnorm(up, theo_mean, theo_sd)*theo_sd
+        theo_up <- theo_mean + qt(up, numb_it-1)*theo_sd
+        theo_low <- theo_mean - qt(up, numb_it-1)*theo_sd
       } else{
         theo_up <- quantile(list_variances[[index]]$variances_beta_theo[,beta_column], up)
         theo_low <- quantile(list_variances[[index]]$variances_beta_theo[,beta_column], low)
       }
 
       theo_formula_mean <- mean(list_variances[[index]]$variances_beta_theo_formula[,beta_column])
+      theo_formula_line <- list_variances[[index]]$variances_beta_theo_formula[1,beta_column]
       if (type_CI == 'mean') {
         theo_formula_sd <- var(list_variances[[index]]$variances_beta_theo_formula[,beta_column])^0.5 /numb_it^0.5
-        theo_formula_up <- theo_formula_mean + qnorm(up, theo_formula_mean, theo_formula_sd)*theo_formula_sd
-        theo_formula_low <- theo_formula_mean - qnorm(up, theo_formula_mean, theo_formula_sd)*theo_formula_sd
+        theo_formula_up <- theo_formula_mean + qt(up, numb_it-1)*theo_formula_sd
+        theo_formula_low <- theo_formula_mean - qt(up, numb_it-1)*theo_formula_sd
       } else{
       theo_formula_up <-quantile(list_variances[[index]]$variances_beta_theo_formula[,beta_column], up)
       theo_formula_low <- quantile(list_variances[[index]]$variances_beta_theo_formula[,beta_column], low)
       }
 
-      store_beta_prac <- rbind(store_beta_prac, cbind(prac_up,prac_mean, prac_low))
-      store_beta_prac_formula <- rbind(store_beta_prac_formula, cbind(prac_formula_up,prac_formula_mean, prac_formula_low))
-      store_beta_theo <- rbind(store_beta_theo, cbind(theo_up,theo_mean, theo_low))
-      store_beta_theo_formula <- rbind(store_beta_theo_formula, cbind(theo_formula_up,theo_formula_mean, theo_formula_low))
+      plot_line_prac <- prac_mean
+      plot_line_prac_formula <- prac_formula_mean
+      plot_line_theo <- theo_mean
+      plot_line_theo_formula <- theo_formula_mean
+
+      if (line != 'mean') {
+        plot_line_prac <- prac_line
+        plot_line_prac_formula <- prac_formula_line
+        plot_line_theo <- theo_line
+        plot_line_theo_formula <- theo_formula_line
+      }
+
+      if (line == 'none') {
+        plot_line_prac <-  rep(NaN, length(prac_mean))
+        plot_line_prac_formula <- rep(NaN, length(prac_mean))
+        plot_line_theo <- rep(NaN, length(prac_mean))
+        plot_line_theo_formula <- rep(NaN, length(prac_mean))
+      }
+
+      store_beta_prac <- rbind(store_beta_prac, cbind(prac_up, plot_line_prac, prac_low))
+      store_beta_prac_formula <- rbind(store_beta_prac_formula, cbind(prac_formula_up, plot_line_prac_formula, prac_formula_low))
+      store_beta_theo <- rbind(store_beta_theo, cbind(theo_up,plot_line_theo, theo_low))
+      store_beta_theo_formula <- rbind(store_beta_theo_formula, cbind(theo_formula_up,plot_line_theo_formula, theo_formula_low))
 
     }
     colnames(store_beta_prac_formula) <- c('up','mean', 'low')
@@ -217,12 +240,13 @@ plots_variance_CI <- function(variance_plots_data, first_method, second_method, 
 
 }
 
-prepare_Y_variances <- function(meth_interest, list_variances, confidence, numb_it, type_CI = 'mean') {
+prepare_Y_variances <- function(meth_interest, list_variances, confidence, numb_it, type_CI = 'mean',line = 'mean') {
   #input: - meth_interest: method to call from 'list variances'
   #       - list_variances: object created by prepare_variance_plots function
   #       - confidence: confidence level in which the variance estimate should be
   #       - type_CI: if 'mean' the confidence intervals of the mean are plotted. If != 'mean' coverage probabilities are plotted
   #output: - a matrix containing the lower/upper bounds and the means of the variances
+  store_line <- c()
   store_mean <- c()
   store_up <- c()
   store_low <- c()
@@ -233,17 +257,26 @@ prepare_Y_variances <- function(meth_interest, list_variances, confidence, numb_
     sd <- var(help_object)^0.5/numb_it^0.5
     mean <-  mean(help_object)
     store_mean <- rbind(store_mean, mean)
-
+    store_line <- rbind(store_line, help_object[1])
     if (type_CI == 'mean') {
-      store_up <- rbind(store_up, mean + qnorm(up, mean, sd)*sd )
-      store_low <- rbind(store_low, mean - qnorm(up, mean, sd)*sd )
+      store_up <- rbind(store_up, mean + qt(up, numb_it-1)*sd )
+      store_low <- rbind(store_low, mean - qt(up, numb_it-1)*sd )
     } else {
       store_up <- rbind(store_up, quantile(help_object, up))
       store_low <- rbind(store_low, quantile(help_object, low))
     } #end if/else
   } #end index
 
-  matrix_return <- cbind(store_up, store_mean, store_low)
+  plot_line <- store_mean
+  if (line != 'mean') {
+    plot_line <- store_line
+  }
+
+  if (line == 'none') {
+    plot_line <- rep(NaN, length(store_mean))
+  }
+
+  matrix_return <- cbind(store_up, plot_line, store_low)
   colnames(matrix_return) <- c('up', 'mean', 'low')
   return(matrix_return)
 }

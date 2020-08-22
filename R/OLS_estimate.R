@@ -1,6 +1,6 @@
 #OLS simulation
 
-var_Y_hat_OLS <- function(population_Y, sample_size, confidence, numb_it, print_it = FALSE) {
+var_Y_hat_OLS <- function(population_Y, sample_size, confidence, numb_it, type_CI = 'mean', line = 'mean', print_it = FALSE) {
     store_Y_vars <- c()
     for (index_sample in sample_size) {
       store_Y_hat <- c()
@@ -18,15 +18,30 @@ var_Y_hat_OLS <- function(population_Y, sample_size, confidence, numb_it, print_
           print(index)
         }
       }
-      store_Y_vars <- cbind(store_Y_vars, colVars(store_Y_hat)) #variances from 50, last column variances from 5000
+      store_Y_vars <- cbind(store_Y_vars, colVars(store_Y_hat))
     }
     low <- (1-confidence)/2
     up <- (1-confidence)/2 + confidence
     mean <- colMeans(store_Y_vars)
     sds <- colVars(store_Y_vars)^0.5/numb_it^0.5
-    upper <- mean + qnorm(up, mean, sds)*sds
-    lower <- mean - qnorm(up, mean, sds)*sds
-    Y_var_CI <- cbind(upper, mean, lower)
+    if (type_CI == 'mean') {
+      upper <- mean + qt(up, numb_it - 1)*sds
+      lower <- mean - qt(up, numb_it - 1)*sds
+    } else{
+      upper <-apply(store_Y_vars, MARGIN = 2, FUN = quantile, probs = up)
+      lower <- apply(store_Y_vars, MARGIN = 2, FUN = quantile, probs = low)
+    }
+
+    plot_line <- mean
+
+    if (line != 'mean') {
+      plot_line <- store_Y_vars[1,]
+    }
+
+    if (line == 'none') {
+      plot_line <- rep(NaN, length(mean))
+    }
+
+    Y_var_CI <- cbind(upper, plot_line, lower)
   return(Y_var_CI)
 }
-
