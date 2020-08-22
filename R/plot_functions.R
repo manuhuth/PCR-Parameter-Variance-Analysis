@@ -78,7 +78,7 @@ prepare_variance_plots <- function(list_coef_var_analysis, sample_size, confiden
     help_mean_prac_formula <- colMeans(list_coef_var_analysis[[index]]$variances_beta_prac_formula)
     means_cl_prac_formula <- rbind(means_cl_prac_formula,  t(help_mean_prac_formula))
     help_var_prac_formula <- colVars(list_coef_var_analysis[[index]]$variances_beta_prac_formula) / sample_size[index] #variance of estimator
-    upper_cl_prac_formula <- rbind( upper_cl_prac_formula, t(help_mean_prac_formula + qnorm( confidence + (1-confidence)/2 ) * help_var_prac_formula^0.5) ) #upper bound CI
+    upper_cl_prac_formula <- rbind( upper_cl_prac_formula, t(help_mean_prac_formula + qnorm(confidence + (1-confidence)/2 ) * help_var_prac_formula^0.5) ) #upper bound CI
     lower_cl_prac_formula <- rbind( lower_cl_prac_formula, t(help_mean_prac_formula - qnorm( confidence + (1-confidence)/2 ) * help_var_prac_formula^0.5) ) #lower bound CI
 
     help_mean_theo_formula <- colMeans(list_coef_var_analysis[[index]]$variances_beta_theo_formula)
@@ -117,7 +117,7 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
     for (index in 1:length(list_variances)) {
       prac_mean <- mean(list_variances[[index]]$variances_beta_prac[,beta_column])
       if (type_CI == 'mean') {
-        prac_sd <- var(list_variances[[index]]$variances_beta_prac[,beta_column])^0.5 /numb_it
+        prac_sd <- var(list_variances[[index]]$variances_beta_prac[,beta_column])^0.5 / numb_it^0.5
         prac_up <- prac_mean + qnorm(up, prac_mean, prac_sd)*prac_sd
         prac_low <- prac_mean - qnorm(up, prac_mean, prac_sd)*prac_sd
       } else{
@@ -128,7 +128,7 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
 
       prac_formula_mean <- mean(list_variances[[index]]$variances_beta_prac_formula[,beta_column])
       if (type_CI == 'mean') {
-        prac_formula_sd <- var(list_variances[[index]]$variances_beta_prac_formula[,beta_column])^0.5 /numb_it
+        prac_formula_sd <- var(list_variances[[index]]$variances_beta_prac_formula[,beta_column])^0.5 /numb_it^0.5
         prac_formula_up <- prac_formula_mean + qnorm(up, prac_formula_mean, prac_formula_sd)*prac_formula_sd
         prac_formula_low <- prac_formula_mean - qnorm(up, prac_formula_mean, prac_formula_sd)*prac_formula_sd
       } else{
@@ -139,7 +139,7 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
 
       theo_mean <- mean(list_variances[[index]]$variances_beta_theo[,beta_column])
       if (type_CI == 'mean') {
-        theo_sd <- var(list_variances[[index]]$variances_beta_theo[,beta_column])^0.5 /numb_it
+        theo_sd <- var(list_variances[[index]]$variances_beta_theo[,beta_column])^0.5 /numb_it^0.5
         theo_up <- theo_mean + qnorm(up, theo_mean, theo_sd)*theo_sd
         theo_low <- theo_mean - qnorm(up, theo_mean, theo_sd)*theo_sd
       } else{
@@ -149,7 +149,7 @@ prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column,
 
       theo_formula_mean <- mean(list_variances[[index]]$variances_beta_theo_formula[,beta_column])
       if (type_CI == 'mean') {
-        theo_formula_sd <- var(list_variances[[index]]$variances_beta_theo_formula[,beta_column])^0.5 /numb_it
+        theo_formula_sd <- var(list_variances[[index]]$variances_beta_theo_formula[,beta_column])^0.5 /numb_it^0.5
         theo_formula_up <- theo_formula_mean + qnorm(up, theo_formula_mean, theo_formula_sd)*theo_formula_sd
         theo_formula_low <- theo_formula_mean - qnorm(up, theo_formula_mean, theo_formula_sd)*theo_formula_sd
       } else{
@@ -202,12 +202,12 @@ plots_variance_CI <- function(variance_plots_data, first_method, second_method, 
     }
     plot_list[[index]] <- ggplot(data = df, aes(sample_size, up1)) +
       geom_ribbon(data=df,aes(ymin=low1,ymax=up1),alpha=0.3, fill = colour_1) +
-      geom_ribbon(data=df,aes(ymin=low2,ymax=up2),alpha=0.3, fill = colour_2) +
       geom_line(data = df, aes(sample_size, mean1,colour = legend_df1)) +
+      geom_ribbon(data=df,aes(ymin=low2,ymax=up2),alpha=0.3, fill = colour_2) +
       geom_line(data = df, aes(sample_size, mean2,colour = legend_df2)) +
       subt +
       xlab(xlab_string) + ylab(' ') + labs(colour = '') +
-      scale_colour_manual(values=c(colour_2, colour_1)) +
+      scale_colour_manual(values=c(colour_1, colour_2)) +
       theme(plot.title = element_text(hjust = 0.5), legend.position = 'none')
   }
   legend <- cowplot::get_legend(plot_list[[1]] + theme(legend.position = "bottom")) #cowplot::otherwise cowplot's ggplot theme is loaded
@@ -217,7 +217,7 @@ plots_variance_CI <- function(variance_plots_data, first_method, second_method, 
 
 }
 
-prepare_Y_variances <- function(meth_interest, list_variances, confidence, type_CI = 'mean') {
+prepare_Y_variances <- function(meth_interest, list_variances, confidence, numb_it, type_CI = 'mean') {
   #input: - meth_interest: method to call from 'list variances'
   #       - list_variances: object created by prepare_variance_plots function
   #       - confidence: confidence level in which the variance estimate should be
@@ -230,7 +230,7 @@ prepare_Y_variances <- function(meth_interest, list_variances, confidence, type_
   up <- (1-confidence)/2 + confidence
   for (index in 1:length(list_variances)) {
     help_object <- list_variances[[index]][[meth_interest]]
-    sd <- var(help_object)^0.5
+    sd <- var(help_object)^0.5/numb_it^0.5
     mean <-  mean(help_object)
     store_mean <- rbind(store_mean, mean)
 
