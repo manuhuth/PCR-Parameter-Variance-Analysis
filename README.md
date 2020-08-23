@@ -57,6 +57,9 @@ I have integrated a continous integration service with Travis CI. It can be foun
 
 > James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An introduction to statistical learning (Vol. 112, p. 18). New York: springer. [Link](https://link.springer.com/book/10.1007%2F978-1-4614-7138-7)
 
+> Jolliffe, I. T. (1986). Principal components in regression analysis. In Principal component analysis (pp. 129-155). Springer, New York, NY. [Link](https://link.springer.com/chapter/10.1007/978-1-4757-1904-8_8)
+
+
 > Jung, R. C., & Tremayne, A. R. (2011). Convolution‐closed models for count time series with applications. Journal of Time Series Analysis, 32(3), 268-280. [Link](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1467-9892.2010.00697.x?casa_token=Z_aij9JL6U0AAAAA%3APnfZIk7h3P8Jzs4pVvW-Hmd1mswaOAMW-5KbW6G6YV3uEQiXvbrT7ZH8pGHJqiSed7ofNfkwSbgb2hfx)
 
 > Lemieux, T. (2006). The “Mincer equation” thirty years after schooling, experience, and earnings. In Jacob Mincer a pioneer of modern labor economics (pp. 127-145). Springer, Boston, MA. [Link](https://link.springer.com/chapter/10.1007/0-387-29175-X_11)
