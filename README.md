@@ -27,6 +27,8 @@ I have integrated a continous integration service with Travis CI. It can be foun
 
 > Blundell, R., Dearden, L., & Sianesi, B. (2005). Evaluating the effect of education on earnings: models, methods and results from the National Child Development Survey. Journal of the Royal Statistical Society: Series A (Statistics in Society), 168(3), 473-512. [Link](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1467-985X.2004.00360.x?casa_token=8XTSrhMvcoIAAAAA%3Ar0ZECHQIWsbtdynj4kZZ_R_-HSDkUKPlkLvS8GF9whkNF584aPmn6nHGR4cZXOOZTVLQQu_-9E8VunWZ)
 
+> Blundell, R., Costa Dias, M., Meghir, C., & Shaw, J. (2016). Female labor supply, human capital, and welfare reform. Econometrica, 84(5), 1705-1753. [Link](https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA11576?casa_token=T7_8JfSc3V0AAAAA:Rq3dQoE4CwRQ5bmOvmvwz1RfUnzp7wYh3LRtrMZsrJjKhrefbBItL0gdFcdZLiYVB-33AUya90S8wTfy)
+
 > Blundell, R., Pistaferri, L., & Saporta-Eksten, I. (2016). Consumption inequality and family labor supply. American Economic Review, 106(2), 387-435. [Link](https://www.aeaweb.org/articles?id=10.1257/aer.20121549)
 
 > British Government. School Starting Age. visited at 10.08.2020 at 19.07. [Link](https://www.gov.uk/schools-admissions/school-starting-age)
@@ -43,7 +45,9 @@ I have integrated a continous integration service with Travis CI. It can be foun
 
 > Consul, P. C., & Jain, G. C. (1973). A generalization of the Poisson distribution. Technometrics, 15(4), 791-799. [Link](https://www.tandfonline.com/doi/abs/10.1080/00401706.1973.10489112)
 
-> Davis-Kean, P. E. (2005). The influence of parent education and family income on child achievement: the indirect role of parental expectations and the home environment. Journal of family psychology, 19(2), 294. [Link]()
+> Davis-Kean, P. E. (2005). The influence of parent education and family income on child achievement: the indirect role of parental expectations and the home environment. Journal of family psychology, 19(2), 294. [Link](https://psycnet.apa.org/buy/2005-06518-016)
+
+> Fan, X., Seshadri, A., & Taber, C. (2015). Estimation of a life-cycle model with human capital, labor supply and retirement. Australia. University of New South Wales. [Link](https://www.ssc.wisc.edu/~aseshadr/WorkingPapers/FST.pdf)
 
 > Friedman, J., Hastie, T., & Tibshirani, R. (2001). The elements of statistical learning (Vol. 1, No. 10). New York: Springer series in statistics. [Link](https://psycnet.apa.org/buy/2005-06518-016)
 
@@ -59,13 +63,16 @@ I have integrated a continous integration service with Travis CI. It can be foun
 
 > Jolliffe, I. T. (1986). Principal components in regression analysis. In Principal component analysis (pp. 129-155). Springer, New York, NY. [Link](https://link.springer.com/chapter/10.1007/978-1-4757-1904-8_8)
 
-
 > Jung, R. C., & Tremayne, A. R. (2011). Convolution‐closed models for count time series with applications. Journal of Time Series Analysis, 32(3), 268-280. [Link](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1467-9892.2010.00697.x?casa_token=Z_aij9JL6U0AAAAA%3APnfZIk7h3P8Jzs4pVvW-Hmd1mswaOAMW-5KbW6G6YV3uEQiXvbrT7ZH8pGHJqiSed7ofNfkwSbgb2hfx)
 
 > Lemieux, T. (2006). The “Mincer equation” thirty years after schooling, experience, and earnings. In Jacob Mincer a pioneer of modern labor economics (pp. 127-145). Springer, Boston, MA. [Link](https://link.springer.com/chapter/10.1007/0-387-29175-X_11)
 
 > Mincer, J. (1974). Schooling, Experience, and Earnings. Human Behavior & Social Institutions No. 2. [Link](https://eric.ed.gov/?id=ED103621)
 
-> Office for National Statistics. Population Estimates. visited at 10.08.2020 at 19.02. [Link]((https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland/mid2015/ukandregionalpopulationestimates18382015.zip))
+> Ku, W., Storer, R. H., & Georgakis, C. (1995). Disturbance detection and isolation by dynamic principal component analysis. Chemometrics and intelligent laboratory systems, 30(1), 179-196. [Link](https://www.sciencedirect.com/science/article/pii/0169743995000763)
+
+> Office for National Statistics. Population Estimates. visited at 10.08.2020 at 19.02. [Link](https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland/mid2015/ukandregionalpopulationestimates18382015.zip)
+
+> Shlens, J. (2014). A tutorial on principal component analysis. arXiv preprint arXiv:1404.1100. [Link](https://www.cs.cmu.edu/~elaw/papers/pca.pdf)
 
 > Willis, R. J. (1973). A new approach to the economic theory of fertility behavior. Journal of political Economy, 81(2, Part 2), S14-S64. [Link](https://www.journals.uchicago.edu/doi/abs/10.1086/260152?journalCode=jpe)
