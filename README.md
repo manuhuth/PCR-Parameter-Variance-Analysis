@@ -1,4 +1,5 @@
-# Student Project: Principal-Component-Parameter-Variance-Analysis
+# Student Project: Analysis of the Variance of the Principal Component Regression Coefficients and the Estimated Outcome
+### Does Knowing the True Variance Covariance Matrix Decrease the Variance?
 ...
 
 The following badges allow easy access to the project's notebook
