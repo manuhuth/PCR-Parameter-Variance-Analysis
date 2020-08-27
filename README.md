@@ -19,7 +19,7 @@ The ensure that every image or format is displayed properly, I recommend to down
 
 
 ## Continous integration with Travis CI to ensure Reproducibility
-To ensure reproducibility, I have integrated Travis CI. The build history can be found here [![Build Status](https://travis-ci.org/HumanCapitalAnalysis/microeconometrics-course-project-manuhuth.svg?branch=master)](https://travis-ci.org/github/manuhuth/PCR-Parameter-Variance-Analysis)
+To ensure reproducibility, I have integrated Travis CI. The build's history can be found here [![Build Status](https://travis-ci.org/HumanCapitalAnalysis/microeconometrics-course-project-manuhuth.svg?branch=master)](https://travis-ci.org/github/manuhuth/PCR-Parameter-Variance-Analysis)
 
 
 ## References
