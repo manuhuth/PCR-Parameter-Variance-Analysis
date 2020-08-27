@@ -5,7 +5,7 @@
 This repository contains my approach to find evidence how the variance of the principal component regression coefficients and the estimated outcome changes, if the true variance covariance matrix is unknown. I have created an extensive data generating process to approximate real world data and derived theory to set up a proper simulation study.
 The main parts of the analysis are the created R functions inside the folder [R](https://github.com/manuhuth/PCR-Parameter-Variance-Analysis/tree/master/R), the [notebook](https://github.com/manuhuth/PCR-Parameter-Variance-Analysis/blob/master/Notebook.ipynb) that is mainly created to reproduce the conducted simulation study and thus does not include proofs of theorems used to derive the set up of the simulation study or the data generating process and the [pdf](https://github.com/manuhuth/PCR-Parameter-Variance-Analysis/blob/master/PDF.pdf) hat is similar to the notebook but contains additionally proofs of theorems used to derive the set up of the simulation study or the data generating process. In the notebook it is referred to the page in the paper, when technical details are left out to increase readability. 
 
-The following badges allow easy access to the project's notebook
+The ensure that every image or format is displayed properly, I recommend to download this notebook from its repository on [GitHub](https://github.com/manuhuth/PCR-Parameter-Variance-Analysis). However, the following badges allow easy access to the project's notebook
 
 [![nbviewer](https://camo.githubusercontent.com/bfeb5472ee3df9b7c63ea3b260dc0c679be90b97/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72656e6465722d6e627669657765722d6f72616e67652e7376673f636f6c6f72423d66333736323626636f6c6f72413d346434643464)](https://nbviewer.jupyter.org/github/manuhuth/PCR-Parameter-Variance-Analysis/blob/master/Notebook.ipynb)
 
@@ -16,7 +16,7 @@ The following badges allow easy access to the project's notebook
        width="109" height="20">
 </a>
 
-However, it is recommended to download the project's folder and view it via Jupyter.
+
 
 ## Continous integration with Travis CI to ensure Reproducibility
 To ensure reproducibility, I have integrated Travis CI. The build history can be found here [![Build Status](https://travis-ci.org/HumanCapitalAnalysis/microeconometrics-course-project-manuhuth.svg?branch=master)](https://travis-ci.org/github/manuhuth/PCR-Parameter-Variance-Analysis)
