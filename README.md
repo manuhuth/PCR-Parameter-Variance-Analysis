@@ -1,6 +1,9 @@
 # Student Project: Analysis of the Variance of the Principal Component Regression Coefficients and the Estimated Outcome
 ### Does Knowing the True Variance Covariance Matrix Decrease the Variance?
-...
+
+## This Repository
+This repository contains my approach to find evidence how the variance of the principal component regression coefficients and the estimated outcome changes, if the true variance covariance matrix is unknown. I have created an extensive data generating process to approximate real world data and derived theory to set up a proper simulation study.
+The main parts of the analysis are the created R functions inside the folder [R](https://github.com/manuhuth/PCR-Parameter-Variance-Analysis/tree/master/R), the [notebook](https://github.com/manuhuth/PCR-Parameter-Variance-Analysis/blob/master/Notebook.ipynb) that is mainly created to reproduce the conducted simulation study and thus does not include proofs of theorems used to derive the set up of the simulation study or the data generating process and the [pdf] hat is similar to the notebook but contains additionally proofs of theorems used to derive the set up of the simulation study or the data generating process.  
 
 The following badges allow easy access to the project's notebook
 
@@ -13,12 +16,11 @@ The following badges allow easy access to the project's notebook
        width="109" height="20">
 </a>
 
+However, it is recommended to download the project's folder and view it via Jupyter.
 
 ## Continous integration with Travis CI to ensure Reproducibility
 I have integrated a continous integration service with Travis CI. It can be found here [![Build Status](https://travis-ci.org/HumanCapitalAnalysis/microeconometrics-course-project-manuhuth.svg?branch=master)](https://travis-ci.org/github/manuhuth/PCR-Parameter-Variance-Analysis)
 
-## This Repository
-...
 
 ## References
 
