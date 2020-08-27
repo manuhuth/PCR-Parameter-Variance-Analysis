@@ -19,7 +19,7 @@ The following badges allow easy access to the project's notebook
 However, it is recommended to download the project's folder and view it via Jupyter.
 
 ## Continous integration with Travis CI to ensure Reproducibility
-I have integrated a continous integration service with Travis CI. It can be found here [![Build Status](https://travis-ci.org/HumanCapitalAnalysis/microeconometrics-course-project-manuhuth.svg?branch=master)](https://travis-ci.org/github/manuhuth/PCR-Parameter-Variance-Analysis)
+To ensure reproducibility, I have integrated Travis CI. The build history can be found here [![Build Status](https://travis-ci.org/HumanCapitalAnalysis/microeconometrics-course-project-manuhuth.svg?branch=master)](https://travis-ci.org/github/manuhuth/PCR-Parameter-Variance-Analysis)
 
 
 ## References
