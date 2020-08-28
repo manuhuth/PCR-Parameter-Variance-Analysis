@@ -58,53 +58,13 @@ plots_variance <- function(df_1, legend_df1, colour_1 = 'orange', df_2, legend_d
   cowplot::plot_grid(p_grid, legend, ncol = 1, rel_heights = height)
 }
 
-
-prepare_variance_plots <- function(list_coef_var_analysis, sample_size, confidence) {
-  #input: - list_coef_var_analysis: object created by prepare_variance_plots function
-  #       - sample_size: vector containing the sample sizes
-  #       - confidence: confidence level in which the variance estimate should be
-  #output: - means_XXX: means of the simulated variance estimates
-  #        - lower/upper_XXX: lower bounds and upper bounds in which confidence percent of the variacne estimates are
-  means_cl_prac_formula <- c()
-  upper_cl_prac_formula <- c()
-  lower_cl_prac_formula <- c()
-  means_cl_theo_formula <- c()
-  upper_cl_theo_formula <- c()
-  lower_cl_theo_formula <- c()
-  means_cl_prac <- c()
-  means_cl_theo <- c()
-
-  for (index in 1:length(list_coef_var_analysis)) {
-    help_mean_prac_formula <- colMeans(list_coef_var_analysis[[index]]$variances_beta_prac_formula)
-    means_cl_prac_formula <- rbind(means_cl_prac_formula,  t(help_mean_prac_formula))
-    help_var_prac_formula <- colVars(list_coef_var_analysis[[index]]$variances_beta_prac_formula) / sample_size[index] #variance of estimator
-    upper_cl_prac_formula <- rbind( upper_cl_prac_formula, t(help_mean_prac_formula + qt(confidence + (1-confidence)/2,sample_size[index] -1 ) * help_var_prac_formula^0.5) ) #upper bound CI
-    lower_cl_prac_formula <- rbind( lower_cl_prac_formula, t(help_mean_prac_formula - qt( confidence + (1-confidence)/2, sample_size[index]-1 ) * help_var_prac_formula^0.5) ) #lower bound CI
-
-    help_mean_theo_formula <- colMeans(list_coef_var_analysis[[index]]$variances_beta_theo_formula)
-    means_cl_theo_formula <- rbind(means_cl_theo_formula, t(help_mean_theo_formula) )
-    help_var_theo_formula <- colVars(list_coef_var_analysis[[index]]$variances_beta_theo_formula) / sample_size[index] #variance of estimator
-    upper_cl_theo_formula <- rbind( upper_cl_theo_formula, t(help_mean_theo_formula + qt( confidence + (1-confidence)/2,sample_size[index]-1 ) * help_var_theo_formula^0.5) ) #upper bound CI
-    lower_cl_theo_formula <- rbind( lower_cl_theo_formula, t(help_mean_theo_formula - qt( confidence + (1-confidence)/2,sample_size[index]-1 ) * help_var_theo_formula^0.5) ) #lower bound CI
-
-    means_cl_prac <- rbind(means_cl_prac, t(colVars(list_coef_var_analysis[[index]]$variances_beta_prac) ) )
-    means_cl_theo <- rbind(means_cl_theo, t(colVars(list_coef_var_analysis[[index]]$variances_beta_theo) ) )
-  }
-    list_return <- list('means_cl_prac_formula' = means_cl_prac_formula, 'upper_cl_prac_formula ' = upper_cl_prac_formula, 'lower_cl_prac_formula' = lower_cl_prac_formula,
-                        'means_cl_theo_formula' =  means_cl_theo_formula, 'upper_cl_theo_formula' = upper_cl_theo_formula, 'lower_cl_theo_formula' = lower_cl_theo_formula,
-                        'means_cl_prac' = means_cl_prac, 'means_cl_theo' = means_cl_theo)
-    return(list_return)
-
-  #end of shape function
-}
-
 #Plots with CI
 prepare_variances_plots_CI <- function(list_variances, sample_size, beta_column, confidence, type_CI = 'mean', line = 'mean', numb_it) {
   #input: - list_variances: object created by prepare_variance_plots function
   #       - sample_size: vector containing the sample sizes
   #       - beta_column: index for which beta the plot should be prepared
   #       - confidence: confidence level in which the variance estimate should be
-  #       - type_CI: if 'mean' the confidence intervals of the mean are plotted. If != 'mean' coverage probabilities are plotted
+  #       - type_CI/line: if 'mean' the confidence intervals/plotted line of the mean are plotted. If != 'mean' coverage probabilities are plotted
   #       - numb_it: umber of iterations used to compute the means of the standard errors
   #output: - 4 data frames containing the lower/upper bounds and the means of the variances
     low <- (1-confidence)/2
@@ -244,7 +204,7 @@ prepare_Y_variances <- function(meth_interest, list_variances, confidence, numb_
   #input: - meth_interest: method to call from 'list variances'
   #       - list_variances: object created by prepare_variance_plots function
   #       - confidence: confidence level in which the variance estimate should be
-  #       - type_CI: if 'mean' the confidence intervals of the mean are plotted. If != 'mean' coverage probabilities are plotted
+  #       - type_CI/line: if 'mean' the confidence intervals/plotted line of the mean are plotted. If != 'mean' quantiles are plotted
   #output: - a matrix containing the lower/upper bounds and the means of the variances
   store_line <- c()
   store_mean <- c()
