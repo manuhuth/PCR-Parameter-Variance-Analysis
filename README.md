@@ -1,7 +1,7 @@
 # Student Project: Analysis of the Variance of the Principal Component Regression Coefficients and the Estimated Outcome
 ### Does Knowing the True Variance Covariance Matrix Decrease the Variance?
 
-## This Repository
+## Repository
 This repository contains my approach to find evidence how the variance of the principal component regression coefficients and the estimated outcome changes, if the true variance covariance matrix is unknown. I have created an extensive data generating process to approximate real world data and derived theory to set up a proper simulation study.
 The main parts of the analysis are the created R functions inside the folder [R](https://github.com/manuhuth/PCR-Parameter-Variance-Analysis/tree/master/R), the [notebook](https://github.com/manuhuth/PCR-Parameter-Variance-Analysis/blob/master/Notebook.ipynb) that is mainly created to reproduce the conducted simulation study and thus does not include proofs of theorems used to derive the set up of the simulation study or the data generating process and the [pdf](https://github.com/manuhuth/PCR-Parameter-Variance-Analysis/blob/master/PDF.pdf) hat is similar to the notebook but contains additionally proofs of theorems used to derive the set up of the simulation study or the data generating process. In the notebook it is referred to the page in the paper, when technical details are left out to increase readability. 
 
